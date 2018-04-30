@@ -1,1 +1,137 @@
+#include <vector>
+#include <iostream>
 
+using namespace std;
+
+char response;
+
+class Card {
+public:
+	void makeMelds();
+	int scoreMelds();
+	string meldsize;
+	string suitRead;
+	int valueRead;
+	int pointValueRead;
+	int meldNum;
+	int score = 0;
+	string meldReader;
+	vector <Card> meld1;
+	vector <Card> meld2;
+	vector <Card> meld3;
+	vector <Card> deadWood;
+	vector <Card> v;
+};
+
+int main () {
+	int playerScore;
+	cout << "Would you like to knock this turn? please enter "y" if yes." << endl;
+	cin >> reponse;
+	if (response == 'y') {
+		makeMelds();
+		playerScore = scoreMelds();
+		cout << "You scored " << playerScore << " points!" << endl;
+	}
+}
+return 0;
+}
+
+void Card::makeMelds(vector <Card> &v) {
+	cout << "Please enter the size of your first meld." << endl;
+	cin >> meldSize;
+	meldNum = stoi(meldSize);
+	cout << "Please enter a card you would like in your first meld ex: "Spades", 2, 	 2" << endl;
+	for (int i = 0; i < meldSize; ++i) {
+		getline(cin,meldReader,',');
+		suitRead = meldReader;
+		getline(cin,meldReader,',');
+		valueRead = stoi(meldReader);
+		getline(cin,meldReader);
+		pointValueRead = stoi(meldReader);
+		v.push_back(Card(suitRead,valueRead,pointValueRead));
+		
+		for (int j = 0; j < 10; ++i) {
+			if (v[i] == playerHand[j]) {
+				meld1.push_back(v[i]);
+				cout << "Please enter another card you would like in your first 				meld." << endl;
+			}
+			else {
+				cout << "You did not enter a card that is present in your hand, 				please try again." << endl;
+				i = i - 1;
+			}
+		}
+	}
+	v.clear();
+	cout << "Would you like to form another meld? If yes please enter "y".";
+	cin >> response;
+	if (response == 'y') {
+		cout << "Please enter the size of your second meld." << endl;
+		cin >> meldSize;
+		meldNum = stoi(meldSize);
+		cout << "Please enter a card you would like in your second meld." << 			endl;
+		for (int i = 0; i < meldSize; ++i) {
+			getline(cin,meldReader,',');
+			suitRead = meldReader;
+			getline(cin,meldReader,',');
+			valueRead = stoi(meldReader);
+			getline(cin,meldReader);
+			pointValueRead = stoi(meldReader);
+			v.push_back(Card(suitRead,valueRead,pointValueRead));
+		
+			for (int j = 0; j < 10; ++i) {
+				if (v[i] == playerHand[j]) {
+					meld2.push_back(v[i]);
+					cout << "Please enter another card you would like in 						your second meld." << endl;
+				}
+				else {
+				cout << "You did not enter a card that is present in your hand, 				please try again." << endl;
+				i = i - 1;
+				}
+			}
+		}	
+	}
+	v.clear();
+	cout << "Would you like to form another meld? If yes please enter "y".";
+	cin >> response;
+	if (response == 'y') {
+		cout << "Please enter the size of your third meld grouping." << endl;
+		cin >> meldSize;
+		meldNum = stoi(meldSize);
+		cout << "Please enter a card you would like in your third meld." << endl;
+		for (int i = 0; i < meldSize; ++i) {
+			getline(cin,meldReader,',');
+			suitRead = meldReader;
+			getline(cin,meldReader,',');
+			valueRead = stoi(meldReader);
+			getline(cin,meldReader);
+			pointValueRead = stoi(meldReader);
+			v.push_back(Card(suitRead,valueRead,pointValueRead));
+		
+			for (int j = 0; j < 10; ++i) {
+				if (v[i] == playerHand[j]) {
+					meld3.push_back(v[i]);
+					cout << "Please enter another card you would like in 						your third meld." << endl;
+				}
+				else {
+					cout << "You did not enter a card that is present in 						your hand, please try again." << endl;
+					i = i - 1;
+				}
+			}
+		}
+	}
+}
+
+int Card::scoreMelds() {
+	deadWood = playerHand;
+	for (int i = 0; i < 5; ++i) {
+		for (int j = 0; j < 10; ++j) {
+			if ((meld1[i] == playerHand[j]) || (meld2[i] == playerHand[j]) || 				(meld3[i] == playerHand[j])) {
+				deadWood.pop_back();
+			}
+		}
+	}
+	for(iter = deadWood.begin(); iter != deadWood.end(); iter++) {
+		score = score + deadWood.pointValue[iter];
+	}
+	return score;
+}
