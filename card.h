@@ -10,10 +10,12 @@ class Card
 {
     public:
         Card(string suit, int value, int pointValue);
+        void printCard();
 
         int value;
         int pointValue;
         string suit;
+        string name;
 };
 
 #endif
