@@ -136,6 +136,9 @@ int Card::scoreMelds() {
 	for(iter = deadWood.begin(); iter != deadWood.end(); iter++) {
 		score = score + deadWood.pointValue[iter];
 	}
+	if (score > 10) {
+		cout << "You cannot knock you do not have a deadwood total of less than 10!" << 		endl << " You are a dirty cheater! Shame on you!" << endl;
+	}
 	CdeadWood = computerHand;
 		for (int i = 0; i < 5; ++i) {
 			for (int j = 0; j < 10; ++j) {
@@ -147,10 +150,12 @@ int Card::scoreMelds() {
 		for(iter = deadWood.begin(); iter != deadWood.end(); iter++) {
 			Cscore = Cscore + CdeadWood.pointValue[iter];
 		}
-	if (Cscore > score) {
-		cout << "The computer scored " << Cscore - score << " points." << endl << " The 		Computer wins!" << endl;
-	}
-	if (score > Cscore) {
-		cout << "The user scored " << score - Cscore << " points." << endl << " The user 			wins!" << endl;
+	if (score < 10){
+		if (Cscore > score) {
+			cout << "The computer scored " << Cscore - score << " points." << endl 				<< " The Computer wins!" << endl;
+		}
+		if (score > Cscore) {
+			cout << "The user scored " << score - Cscore << " points." << endl << " 			The user wins!" << endl;
+		}
 	}
 }
