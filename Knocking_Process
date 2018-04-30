@@ -14,23 +14,26 @@ public:
 	int valueRead;
 	int pointValueRead;
 	int meldNum;
+	int Cscore = 0;
 	int score = 0;
 	string meldReader;
 	vector <Card> meld1;
 	vector <Card> meld2;
 	vector <Card> meld3;
+	vector <Card> Cmeld1;
+	vector <Card> Cmeld2;
+	vector <Card> Cmeld3;
 	vector <Card> deadWood;
+	vector <Card> CdeadWood;
 	vector <Card> v;
 };
 
 int main () {
-	int playerScore;
 	cout << "Would you like to knock this turn? please enter "y" if yes." << endl;
 	cin >> reponse;
 	if (response == 'y') {
 		makeMelds();
-		playerScore = scoreMelds();
-		cout << "You scored " << playerScore << " points!" << endl;
+		scoreMelds();
 	}
 }
 return 0;
@@ -133,5 +136,21 @@ int Card::scoreMelds() {
 	for(iter = deadWood.begin(); iter != deadWood.end(); iter++) {
 		score = score + deadWood.pointValue[iter];
 	}
-	return score;
+	CdeadWood = computerHand;
+		for (int i = 0; i < 5; ++i) {
+			for (int j = 0; j < 10; ++j) {
+				if ((Cmeld1[i] == computerHand[j]) || (Cmeld2[i] == 					computerHand[j]) || (Cmeld3[i] == computerHand[j])) {
+				CdeadWood.pop_back();
+				}
+			}
+		}
+		for(iter = deadWood.begin(); iter != deadWood.end(); iter++) {
+			Cscore = Cscore + CdeadWood.pointValue[iter];
+		}
+	if (Cscore > score) {
+		cout << "The computer scored " << Cscore - score << " points." << endl << " The 		Computer wins!" << endl;
+	}
+	if (score > Cscore) {
+		cout << "The user scored " << score - Cscore << " points." << endl << " The user 			wins!" << endl;
+	}
 }
