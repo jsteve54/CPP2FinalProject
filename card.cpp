@@ -204,7 +204,7 @@ bool operator==(vector <Card> &a, vector <Card> &b) {
 	return a - b == 0;
 }
 
-/*bool operator-(vector<Card> &a, vector <Card> &b( {
+/*int operator-(vector<Card> &a, vector <Card> &b( {
 	Card var;
 }*/
 
