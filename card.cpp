@@ -120,6 +120,7 @@ void Card::makeMelds() {
 	cin >> meldSize;
 	meldNum = stoi(meldSize);
 	vector <Card> v(meldNum);
+	Card varia;
 	cout << "Please enter a card you would like in your first meld ex: Spades, 2, 2" << endl;
 	for (auto it = v.begin(); it != v.end(); it++) {
 		getline(cin,meldReader,',');
@@ -132,7 +133,7 @@ void Card::makeMelds() {
 		
 		for (auto iter = playerHand.begin(); iter != playerHand.end(); iter++) {
 			if (v == playerHand) {
-				meld1.push_back(v);
+				meld1 = v;
 				cout << "Please enter another card you would like in your first 				meld." << endl;
 			}
 			else {
@@ -160,7 +161,7 @@ void Card::makeMelds() {
 		
 			for (auto it = playerHand.begin(); it != playerHand.end(); it++) {
 				if (v == playerHand) {
-					meld2.push_back(v);
+					meld2 = v;
 					cout << "Please enter another card you would like in 						your second meld." << endl;
 				}
 				else {
@@ -189,7 +190,7 @@ void Card::makeMelds() {
 		
 			for (auto iter = playerHand.begin(); iter != playerHand.end(); iter++) {
 				if (v == playerHand) {
-					meld3.push_back(v);
+					meld3 = v;
 					cout << "Please enter another card you would like in 						your third meld." << endl;
 				}
 				else {
@@ -204,9 +205,9 @@ bool operator==(vector <Card> &a, vector <Card> &b) {
 	return a - b == 0;
 }
 
-/*int operator-(vector<Card> &a, vector <Card> &b( {
+int operator-(vector<Card> &a, vector <Card> &b) {
 	Card var;
-}*/
+}
 
 int Card::scoreMelds() {
 	deadWood = playerHand;
